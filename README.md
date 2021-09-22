@@ -8,8 +8,7 @@ Repository for the article _Scaling of Mortality in 742 Metropolitan Areas of th
 The file _public_use_data.csv_: Contains a public-use dataset. Note that the following changes have been applied due to restrictions in data sharing agreements
 
 * All death counts below 10 have been suppressed
-* Death data for Costa Rica has not been included
-* City names for Argentina, Panama have been censored
+* City names have been censored
 
 This file contains the following columns:
 
