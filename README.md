@@ -12,8 +12,8 @@ The file _public_use_data.csv_: Contains a public-use dataset. Note that the fol
 
 This file contains the following columns:
 
-* US: 1 if the city is in the US, 0 if it's in Latin America
-* city_id: unique city identifier. 
+* Country: BR (Brazil), US (USA), MX (Mexico), or LA (Argentina, Chile, Colombia, Costa Rica, El Salvador, Guatemala, Panama, and Peru)
+* city_id: unique (dummy) city identifier. 
 * type: type of cause of death (all-cause mortality, large groupings, small groupings)
 * category: category of causes of death (all-cause mortality or CMNN/cancer/NCDs/injuries)
 * name: specific cause of death
@@ -23,5 +23,3 @@ This file contains the following columns:
 * prop15: proportion of the population aged 15-39 for 2012-2016 [except SV: 2010-2014] 
 * prop40: proportion of the population aged 40-64 for 2012-2016 [except SV: 2010-2014] 
 * prop65: proportion of the population aged >=65 for 2012-2016 [except SV: 2010-2014] 
-
-
