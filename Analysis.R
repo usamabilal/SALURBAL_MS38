@@ -651,13 +651,15 @@ map_dfr(model_list, function(model){
 
 small_groups_results_f3<-small_groups_models%>% 
   map_dfr(function(models){
+    #models<-small_groups_models[[1]]
     model_list<-names(models)
     model_list<-model_list[grepl("m_", model_list)]
     map_dfr(model_list, function(model){
+      #model<-model_list[[1]]
       index<-which(names(models)%in%model)
       tidy(models[[index]]) %>% filter(term=="log(pop)") %>% mutate(area=model) %>% 
         mutate(intercept=tidy(models[[index]]) %>% filter(term=="(Intercept)") %>% pull(estimate),
-               sd=sd(models[[index]]$model$`log(deaths)`),
+               sd=sqrt(mean(models[[index]]$residuals^2)),
                lci=estimate-1.96*std.error,
                uci=estimate+1.96*std.error,
                category4=models$category,
@@ -696,7 +698,9 @@ f3b<-ggplot(small_groups_results_f3 %>%   filter(area%in%c("m_us", "m_lac")) %>%
   stat_smooth(method="lm", lty=2, se=F, color="black")+
   geom_point(aes(fill=category4), pch=21, color="black", size=4) +
   labs(y=expression("Scaling Coefficient ("*beta*")"), 
-       x=expression("Standard Deviation ("*sigma*")"), fill="",
+       #x=expression("Mean Squared Error ("*sigma*")"), 
+       x=expression(sqrt("Mean Squared Error")~"("*sigma*")"),
+       fill="",
        title="Scaling vs Variability")+
   scale_fill_brewer(type="qual", palette=2)+
   facet_wrap(~area, nrow=1)+
@@ -720,8 +724,8 @@ ggsave("results/Figure5.pdf", f3, width=11, height=10)
 small_groups_results_f3 %>% 
   group_by(area) %>% 
   group_modify(~{
-    cora<-cor(.x$estimate, .x$intercept, method="spearman")
-    corsd<-cor(.x$estimate, .x$sd, method="spearman")
+    cora<-cor(.x$estimate, .x$intercept, method="pearson")
+    corsd<-cor(.x$estimate, .x$sd, method="pearson")
     data.frame(cor_intercept=cora, cor_sd=corsd)
   }) %>% 
   filter(area%in%c("m_us", "m_lac"))
