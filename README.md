@@ -1,6 +1,8 @@
 # Scaling of Mortality in 742 Metropolitan Areas of the Americas
 Repository for the article _Scaling of Mortality in 742 Metropolitan Areas of the Americas_.
 
+[![DOI](https://zenodo.org/badge/409335730.svg)](https://zenodo.org/badge/latestdoi/409335730)
+
 * _Data_Management.R_: Contains data management for both mortality and population. 
 * _Analysis.R_: Contains all analysis for the paper. 
 * _MS38_HELPER_FUNCTIONS.R_: Contains a few helper functions.
